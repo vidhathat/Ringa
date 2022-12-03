@@ -1,0 +1,8 @@
+version: "3.8"
+services:
+  myblog:
+    build: ./ringa
+    container_name: ringa
+    ports:
+      - '3000:3000'
+    stdin_open: true
