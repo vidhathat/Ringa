@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount, useContract, useSigner } from "wagmi";
-import { CONTRACT_ADDRESS, CONTRACT_ABI } from './Contract/contract'
+import { CONTRACT_ADDRESS, CONTRACT_ABI } from "./Contract/contract";
 
 function App() {
 	const games = [
@@ -16,6 +16,29 @@ function App() {
 	];
 
 	const [game, setGame] = useState(0);
+
+	const { data: signer } = useSigner();
+	const contract = useContract({
+		address: CONTRACT_ADDRESS,
+		abi: CONTRACT_ABI,
+		signerOrProvider: signer,
+	});
+
+	console.log("CONTRACT ", contract);
+
+	const mintGame = async () => {
+		try {
+			const mint = await contract.mint(games[game].tokenId);
+			console.log(mint);
+			await mint.wait();
+			console.log(mint);
+			contract.on("Transfer", (from, to, tokenId) => {
+				console.log("FROM ", from, "TO ", to, "TOKEN ", tokenId.toString());
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 	return (
 		<div className="bg-black text-white min-h-screen">
@@ -57,7 +80,12 @@ function App() {
 						style={{ minHeight: "500px" }}
 					/>
 				</div>
-        <button className="px-8 py-4 bg-white text-black rounded-xl transform hover:scale-105">Mint</button>
+				<button
+					onClick={mintGame}
+					className="px-8 py-4 bg-white text-black rounded-xl transform hover:scale-105"
+				>
+					Mint
+				</button>
 			</div>
 		</div>
 	);
