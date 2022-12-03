@@ -1,11 +1,11 @@
 # Fetching the latest node image on apline linux
-FROM node:17-alpine
+FROM node as build
 
 # Declaring env
 ENV NODE_ENV development
 
 # Setting up the work directory
-WORKDIR /ringa
+WORKDIR /ringav1
 
 # Installing dependencies
 COPY package.json .

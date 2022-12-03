@@ -32,7 +32,7 @@ function App() {
 			console.log(mint);
 			await mint.wait();
 			console.log(mint);
-			contract.on("Transfer", (from, to, tokenId) => {
+			contract.on("TransferSingle", (from, to, tokenId) => {
 				console.log("FROM ", from, "TO ", to, "TOKEN ", tokenId.toString());
 			});
 		} catch (err) {
