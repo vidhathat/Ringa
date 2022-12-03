@@ -19,8 +19,7 @@ function App() {
         <h1 className='text-5xl font-extrabold'>Games</h1>
         <div className='flex items-center justify-center gap-4'>
           <img onClick={() => setGame('TicTacToe')} src='https://i.imgur.com/L7bv9xw.png' className='w-36 h-36 rounded-full' alt='tictactoe' />
-          <img onClick={() => setGame('Snake')} src='https://i.imgur.com/L7bv9xw.png' className='w-36 h-36 rounded-full' alt='tictactoe' />
-          <img onClick={() => setGame('TRex')} src='https://i.imgur.com/L7bv9xw.png' className='w-36 h-36 rounded-full' alt='tictactoe' />
+          <img onClick={() => setGame('Snake')} src='https://i.imgur.com/L7bv9xw.png' className='w-36 h-36 rounded-full' alt='snake game' />
         </div>
       </div>
 
